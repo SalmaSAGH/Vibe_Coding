@@ -1,0 +1,98 @@
+You are a senior frontend engineer specializing in data dashboards
+and human-centered interfaces for decision support systems.
+
+Design and generate a Streamlit-based web dashboard for a
+Smart Agriculture Decision Support System.
+
+CONTEXT
+The frontend consumes a REST API (FastAPI backend) that provides:
+- Current sensor readings (soil moisture, temperature, humidity)
+- Historical sensor data
+- Irrigation and fertilization recommendations
+- Alert messages (drought, overwatering, temperature stress)
+
+The target users are farmers and agricultural technicians
+with limited technical background.
+
+TECHNOLOGY CONSTRAINTS
+- Language: Python
+- Framework: Streamlit
+- Visualization: Plotly
+- Communication with backend via HTTP (requests library)
+- No authentication required for this prototype
+
+API ENDPOINTS AVAILABLE
+- GET /api/sensors/list
+- GET /api/sensors/current/{sensor_id}
+- GET /api/sensors/history/{sensor_id}?limit=N
+- GET /api/recommendations/{sensor_id}
+- POST /api/sensors/data
+
+UI REQUIREMENTS
+
+1. Global Layout
+- Wide layout with sidebar navigation
+- Clear title and agricultural visual identity
+- Custom CSS for visual clarity and usability
+
+2. Sidebar
+- Sensor selection dropdown
+- Page navigation with multiple views:
+  - Dashboard
+  - Historical Data
+  - Add Sensor Data
+  - About
+- Optional auto-refresh capability
+
+3. Dashboard Page
+- Display current sensor values using visual gauges
+  - Soil moisture (%)
+  - Temperature (°C)
+  - Humidity (%)
+- Highlight optimal ranges visually
+- Display last update timestamp
+
+4. Recommendations Section
+- Fetch recommendations from the backend
+- Display irrigation recommendations:
+  - Action
+  - Water amount
+  - Priority
+  - Explanation
+- Display fertilization recommendations with explanations
+
+5. Alerts Visualization
+- Display alerts prominently
+- Use color coding to distinguish:
+  - Critical alerts (e.g., drought risk)
+  - Warning alerts (e.g., overwatering risk)
+
+6. Historical Data Page
+- Display time-series charts for:
+  - Soil moisture
+  - Temperature
+  - Humidity
+- Interactive Plotly charts
+- Display raw data table and basic statistics
+
+7. Add Sensor Data Page
+- Form allowing manual submission of sensor data
+- Input validation for realistic ranges
+- Confirmation feedback on successful submission
+
+8. About Page
+- Describe system purpose and features
+- Explain how to use the dashboard
+- List technology stack
+
+NON-FUNCTIONAL REQUIREMENTS
+- Interface must be intuitive and readable
+- Avoid information overload
+- Use visual cues instead of technical jargon
+- Code should be modular and well-commented
+
+OUTPUT FORMAT
+- Provide a single Streamlit application file (app.py)
+- Include helper functions for API calls
+- Use Plotly for charts and gauges
+- Include basic error handling for API failures

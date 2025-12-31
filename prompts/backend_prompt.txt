@@ -1,0 +1,94 @@
+You are a senior backend engineer specializing in Python FastAPI
+and data-driven decision support systems.
+
+Design and generate a backend API for a Smart Agriculture Decision Support System.
+
+CONTEXT
+The system collects IoT sensor data from agricultural fields
+(soil moisture, temperature, humidity), stores historical data,
+and generates irrigation and fertilization recommendations
+using explainable rule-based logic.
+
+TECHNOLOGY CONSTRAINTS
+- Language: Python 3
+- Framework: FastAPI
+- Database: SQLite
+- No ORM required (use sqlite3)
+- API should be RESTful
+- Code should be readable and modular
+
+ARCHITECTURAL REQUIREMENTS
+- Clear separation of concerns:
+  - API layer (FastAPI routes)
+  - Data access layer (repository / service)
+  - Decision logic layer
+- Use dependency injection for database access
+- Use Pydantic models for request/response validation
+- Include basic error handling
+- Decision logic must be explainable (human-readable explanations)
+
+PROJECT STRUCTURE
+Generate a FastAPI project with the following structure:
+
+backend/
+├── main.py                # FastAPI app and routes
+├── database.py            # SQLite initialization and connection management
+├── models.py              # Domain models
+└── services/
+    ├── data_service.py    # Data access logic
+    └── decision_engine.py # Agricultural decision logic
+
+API ENDPOINTS TO IMPLEMENT
+
+1. Sensor Data Ingestion
+POST /api/sensors/data
+- Accepts sensor_id, soil_moisture, temperature, humidity, timestamp
+- Validates data ranges
+- Stores reading in the database
+- Returns the stored reading
+
+2. Current Sensor Data
+GET /api/sensors/current/{sensor_id}
+- Returns the latest sensor reading
+- Returns 404 if no data exists
+
+3. Sensor History
+GET /api/sensors/history/{sensor_id}?limit=N
+- Returns historical readings (most recent first)
+
+4. Recommendation Endpoint
+GET /api/recommendations/{sensor_id}
+- Uses the latest sensor data and recent history
+- Generates irrigation and fertilization recommendations
+- Includes alerts (drought, overwatering, temperature stress)
+- Recommendations must include explanations
+- Saves recommendations to database for traceability
+
+5. Utility Endpoints
+- List all sensors with latest data
+- Health check endpoint
+
+DECISION LOGIC REQUIREMENTS
+- Use rule-based logic (no machine learning)
+- Irrigation rules based on:
+  - Soil moisture thresholds
+  - Temperature
+  - Moisture trend from history
+- Fertilization rules can be simple heuristics
+- Alerts should be explicit and human-readable
+
+DATABASE REQUIREMENTS
+- Table for sensor readings
+- Table for recommendations
+- Store recommendations as JSON for traceability
+- Use timestamps consistently
+
+NON-FUNCTIONAL CONSIDERATIONS
+- Code must be explainable and maintainable
+- Avoid over-engineering
+- Include comments highlighting potential limitations or future improvements
+
+OUTPUT FORMAT
+- Provide full Python source code for all files
+- Use clear comments
+- Do not include frontend code
